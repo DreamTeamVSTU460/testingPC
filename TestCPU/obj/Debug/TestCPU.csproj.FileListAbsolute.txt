@@ -17,7 +17,6 @@ C:\Users\EO\Desktop\Основы эксплуатации\ЛР 2\Репозит�
 C:\Users\EO\Desktop\Основы эксплуатации\ЛР 2\Репозиторий\testingPC\TestCPU\obj\Debug\TestCPU.Form1.resources
 C:\Users\EO\Desktop\Основы эксплуатации\ЛР 2\Репозиторий\testingPC\TestCPU\obj\Debug\TestCPU.Properties.Resources.resources
 C:\Users\EO\Desktop\Основы эксплуатации\ЛР 2\Репозиторий\testingPC\TestCPU\obj\Debug\TestCPU.csproj.GenerateResource.Cache
-<<<<<<< HEAD
 C:\Users\admin\Documents\GitHub\testingPC\testingPC\TestCPU\bin\Debug\TestCPU.exe.config
 C:\Users\admin\Documents\GitHub\testingPC\testingPC\TestCPU\obj\Debug\TestCPU.exe
 C:\Users\admin\Documents\GitHub\testingPC\testingPC\TestCPU\obj\Debug\TestCPU.pdb
@@ -30,15 +29,12 @@ C:\Users\admin\Documents\GitHub\testingPC\testingPC\TestCPU\obj\Debug\TestCPU.cs
 C:\Users\admin\Desktop\testingPC\TestCPU\bin\Debug\TestCPU.exe.config
 C:\Users\admin\Desktop\testingPC\TestCPU\obj\Debug\TestCPU.exe
 C:\Users\admin\Desktop\testingPC\TestCPU\obj\Debug\TestCPU.pdb
-=======
 C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\bin\Debug\TestCPU.exe.config
 C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.exe
 C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.pdb
 C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\bin\Debug\TestCPU.exe
 C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\bin\Debug\TestCPU.pdb
-C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\bin\Debug\ZedGraph.dll
 C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.csprojResolveAssemblyReference.cache
 C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.Form1.resources
 C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.Properties.Resources.resources
 C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.csproj.GenerateResource.Cache
->>>>>>> refs/remotes/origin/Fedya
