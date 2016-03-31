@@ -1,0 +1,404 @@
+/// <summary>
+/// take any string and encrypt it using MD5 then
+/// return the encrypted data 
+/// </summary>
+/// <param name="data">input text you will enterd to encrypt it</param>
+/// <returns>return the encrypted text as hexadecimal string</returns>
+private string GetMD5HashData(string data)
+{
+    //create new instance of md5
+    MD5 md5 = MD5.Create();
+
+    //convert the input text to array of bytes
+    byte[] hashData = md5.ComputeHash(Encoding.Default.GetBytes(data));
+
+    //create new instance of StringBuilder to save hashed data
+    StringBuilder returnValue = new StringBuilder();
+
+    //loop for each byte and add it to StringBuilder
+    for (int i = 0; i < hashData.Length; i++)
+    {
+        returnValue.Append(hashData[i].ToString());
+    }
+
+    // return hexadecimal string
+    return returnValue.ToString();
+
+}
+Hashing using the SHA1 class
+
+Hide   Copy Code
+/// <summary>
+/// take any string and encrypt it using SHA1 then
+/// return the encrypted data
+/// </summary>
+/// <param name="data">input text you will enterd to encrypt it</param>
+/// <returns>return the encrypted text as hexadecimal string</returns>
+private string GetSHA1HashData(string data)
+{
+    //create new instance of md5
+    SHA1 sha1 = SHA1.Create();
+
+    //convert the input text to array of bytes
+    byte[] hashData = sha1.ComputeHash(Encoding.Default.GetBytes(data));
+
+    //create new instance of StringBuilder to save hashed data
+    StringBuilder returnValue = new StringBuilder();
+
+    //loop for each byte and add it to StringBuilder
+    for (int i = 0; i < hashData.Length; i++)
+    {
+        returnValue.Append(hashData[i].ToString());
+    }
+
+    // return hexadecimal string
+    return returnValue.ToString();
+}
+Validation methods
+
+Hide   Shrink    Copy Code
+/// <summary>
+/// encrypt input text using MD5 and compare it with
+/// the stored encrypted text
+/// </summary>
+/// <param name="inputData">input text you will enterd to encrypt it</param>
+/// <param name="storedHashData">the encrypted text
+///         stored on file or database ... etc</param>
+/// <returns>true or false depending on input validation</returns>
+private bool ValidateMD5HashData(string inputData, string storedHashData)
+{
+    //hash input text and save it string variable
+    string getHashInputData = GetMD5HashData(inputData);
+
+    if (string.Compare(getHashInputData, storedHashData) == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+/// <summary>
+/// encrypt input text using SHA1 and compare it with
+/// the stored encrypted text
+/// </summary>
+/// <param name="inputData">input text you will enterd to encrypt it</param>
+/// <param name="storedHashData">the encrypted
+///           text stored on file or database ... etc</param>
+/// <returns>true or false depending on input validation</returns>
+
+private bool ValidateSHA1HashData(string inputData, string storedHashData)
+{
+    //hash input text and save it string variable
+    string getHashInputData = GetSHA1HashData(inputData);
+
+    if (string.Compare(getHashInputData, storedHashData) == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+
+ВНИМАНИЕ! Данная статья переведена с использованием программного обеспечения Майкрософт для машинного перевода и, возможно, отредактирована посредством технологии Community Translation Framework (CTF). Корпорация Майкрософт предлагает вам статьи, обработанные средствами машинного перевода, отредактированные членами сообщества Майкрософт и переведенные профессиональными переводчиками, чтобы вы могли ознакомиться со всеми статьями нашей базы знаний на нескольких языках. Статьи, переведенные с использованием средств машинного перевода и отредактированные сообществом, могут содержать смысловое, синтаксические и (или) грамматические ошибки. Корпорация Майкрософт не несет ответственности за любые неточности, ошибки или ущерб, вызванные неправильным переводом контента или его использованием нашими клиентами. Подробнее об CTF можно узнать по адресу http://support.microsoft.com/gp/machine-translation-corrections/ru.
+
+Эта статья на английском языке: 307010
+Для версии Microsoft Visual Basic .NET в данной статье см. 301070.
+Данной статье содержатся ссылки на следующие пространства имен библиотеки классов Microsoft платформа.NET Framework:
+System.IO
+System.Security
+System.Security.Cryptography
+Примечание Данная статья относится к Microsoft платформа.NET Framework 2.0.
+Сводка
+В данной статье описывается использование криптографических классов, предоставляемых платформой Microsoft .NET Framework, для шифрования текстового файла в нечитаемое состояние и для расшифровки этого текстового файла обратно в его исходный формат.
+Требования
+
+В следующем списке представлены рекомендации для оборудования, программного обеспечения, сетевой инфраструктуры и пакетов обновления, которые вы должны иметь:
+Microsoft Windows 2000 Professional, Windows 2000 Server, Windows 2000 Advanced Server, Windows NT 4.0 Server или Microsoft Windows XP Professional
+Microsoft Visual Studio 2005 или Microsoft Visual Studio .NET
+Шифрование и расшифровка
+
+Пространство имен System.Security.Cryptographic в платформа.NET Framework корпорации Майкрософт предоставляет разнообразные средства для шифрования и расшифровки. Класс CryptoStream является одним из многих предоставляемых классов. Класс CryptoStream предназначен для шифрования и расшифровки содержимого, как она поступает в файл.
+Зашифровать файл
+
+Чтобы зашифровать файл, выполните следующие действия.
+Запустите Visual Studio 2005 или Visual Studio .NET.
+Выберите C# в списке проектови в списке Шаблонывыберите Консольное приложение . Visual C# .NET создает статический класс, а также пустой процедуре Main() .
+Используйте оператор using (как показано в примере кода ниже) для следующих пространств имен:
+System
+System.Security
+System.Security.Cryptography
+System.Text
+System.IO
+Таким образом, нет необходимости указывать объявления из этих пространств имен в коде. Необходимо использовать эти инструкции перед всеми остальными объявлениями.
+
+using System;
+using System.IO;
+using System.Security;
+using System.Security.Cryptography;
+using System.Runtime.InteropServices;
+using System.Text;
+					
+Создает свой секретный ключ для шифрования и расшифровки данных. DESCryptoServiceProvider основан на алгоритме симметричного шифрования. Симметричное шифрование требует ключ и вектор инициализации (IV) для шифрования данных. Для расшифровки данных, должен иметь тот же ключ и вектор Инициализации же. Также необходимо использовать тот же самый алгоритм шифрования. Ключи можно создать с помощью любого из следующих методов:
+Способ 1 Запрашивать пароль. Затем используйте пароль в качестве ключа и вектора Инициализации.
+Способ 2 При создании нового экземпляра классов симметричного шифрования, новые ключ и вектор Инициализации автоматически создаются для сеанса. Используйте ключ и вектор Инициализации, которые создаются с помощью управляемых классов симметричного шифрования для шифрования и расшифровки файла. 
+
+Дополнительные сведения о способах создания и распространения ключей содержатся в документации SDK платформа.NET Framework корпорации Майкрософт или посетите следующий веб-узел Microsoft Developer Network (MSDN):
+Создание ключей для шифрования и расшифровки
+Добавьте следующую функцию для создания нового ключа сеанса (как указано в способе 2 шага 4):
+//  Call this function to remove the key from memory after use for security.
+[System.Runtime.InteropServices.DllImport("KERNEL32.DLL", EntryPoint="RtlZeroMemory")]
+public static extern bool ZeroMemory(ref string Destination, int Length);
+		
+// Function to Generate a 64 bits Key.
+static string GenerateKey() 
+{
+	// Create an instance of Symetric Algorithm. Key and IV is generated automatically.
+	DESCryptoServiceProvider desCrypto =(DESCryptoServiceProvider)DESCryptoServiceProvider.Create();
+
+	// Use the Automatically generated key for Encryption. 
+	return ASCIIEncoding.ASCII.GetString(desCrypto.Key);
+}
+Создайте метод в классе с именем EncryptFile. Класс EncryptFile должен иметь следующие три параметра:
+sInputFilename
+sOutputFilename
+sKey (Секретный ключ, используемый для шифрования и расшифровки файла.)
+
+static void EncryptFile(string sInputFilename,
+		string sOutputFilename,
+		string sKey)
+					
+В процедуре EncryptFile создайте входной объект FileStream и выходной объект FileStream . Эти объекты могут прочитаны из и записаны в конечные файлы.
+
+FileStream fsInput = new FileStream(sInputFilename, 
+				FileMode.Open, 
+				FileAccess.Read);
+
+FileStream fsEncrypted = new FileStream(sOutputFilename, 
+				FileMode.Create, 
+				FileAccess.Write);
+					
+Объявите экземпляр класса DESCryptoServiceProvider . Представляет фактическое шифрования и расшифровки фактические технология, которая используется для файлов. На этом этапе можно создать другого поставщика, если вы предпочитаете использовать RSAsecutiry или другой криптографический метод.
+
+DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+					
+Поставщик служб шифрования должен предоставить свой секретный ключ как массив байтов. Пространство имен System.Text предоставляет функцию с именем GetBytes(). Как часть его возможности кодирования функция GetBytes() принимает строку и возвращает массив байтов. Размер ключа, отличается для каждого криптографический метод. Например Стандартная DES (Data Encryption) имеет 64-битный ключ, равно 8 байт или 8 символов.
+
+Если не задать ключ, поставщик случайным образом генерирует его. Это успешно для шифрования файла, но нет способа для расшифровки файла. Обратите внимание, что необходимо также указать вектор инициализации (IV). Это значение используется в процессе шифрования. Как ключ вектор Инициализации генерируется случайным образом, если значение не предоставлено. Поскольку значения должны быть одинаковыми для шифрования и расшифровки, вы не разрешают случайных эти значения.
+
+DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+					
+Создайте экземпляр класса CryptoStream с помощью поставщика служб шифрования для получения объекта шифрования (CreateEncryptor) и существующий выходной объект FileStream как часть конструктора.
+
+ICryptoTransform desencrypt = DES.CreateEncryptor();
+CryptoStream cryptostream = new CryptoStream(fsEncrypted, 
+					desencrypt, 
+					CryptoStreamMode.Write);
+					
+Чтение во входном файле и затем записать в выходной файл. Проходят через объект CryptoStream , где файл был зашифрован с помощью ключа, указанный.
+
+byte[] bytearrayinput = new byte[fsInput.Length - 1];
+fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
+cryptostream.Write(bytearrayinput, 0, bytearrayinput.Length);
+					
+Расшифровать файл
+
+Для расшифровки файла, выполните следующие действия.
+Создайте метод и назовите его DecryptFile. Процесс расшифровки похож на процесс шифрования, тем не менее, процедура DecryptFile имеет два основных отличия от процедуры EncryptFile .
+CreateDecryptor вместо CreateEncryptor используется для создания объекта CryptoStream , который указывает, как можно использовать объект.
+Если дешифрованный текст записывается файл назначения, объект CryptoStream теперь является источником вместо поток назначения.
+
+static void DecryptFile(string sInputFilename, 
+	                string sOutputFilename,
+	                string sKey)
+{
+	DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+	//A 64 bit key and IV is required for this provider.
+	//Set secret key For DES algorithm.
+	DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+	//Set initialization vector.
+	DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+
+	//Create a file stream to read the encrypted file back.
+	FileStream fsread = new FileStream(sInputFilename, 
+		                           FileMode.Open, 
+		                           FileAccess.Read);
+	//Create a DES decryptor from the DES instance.
+	ICryptoTransform desdecrypt = DES.CreateDecryptor();
+	//Create crypto stream set to read and do a 
+	//DES decryption transform on incoming bytes.
+	CryptoStream cryptostreamDecr = new CryptoStream(fsread, 
+		                                         desdecrypt,
+		                                         CryptoStreamMode.Read);
+	//Print the contents of the decrypted file.
+	StreamWriter fsDecrypted = new StreamWriter(sOutputFilename);
+	fsDecrypted.Write(new StreamReader(cryptostreamDecr).ReadToEnd());
+	fsDecrypted.Flush();
+	fsDecrypted.Close();
+}
+					
+Добавьте следующие строки в Main() процедуру для вызова EncryptFile и DecryptFile:
+static void Main()
+{
+      // Must be 64 bits, 8 bytes.
+      // Distribute this key to the user who will decrypt this file.
+      string sSecretKey;
+         
+      // Get the key for the file to encrypt.
+      sSecretKey = GenerateKey();
+
+      // For additional security pin the key.
+      GCHandle gch = GCHandle.Alloc( sSecretKey,GCHandleType.Pinned );
+         
+      // Encrypt the file.        
+      EncryptFile(@"C:\MyData.txt", 
+         @"C:\Encrypted.txt", 
+         sSecretKey);
+
+      // Decrypt the file.
+      DecryptFile(@"C:\Encrypted.txt", 
+         @"C:\Decrypted.txt", 
+         sSecretKey);
+
+      // Remove the key from memory. 
+      ZeroMemory(gch.AddrOfPinnedObject(), sSecretKey.Length * 2);
+      gch.Free();
+}
+Сохраните файл. Запустите приложение. Убедитесь, что путь, используемый для имени входного файла указывает на существующий файл.
+Процедура тестирования
+
+Проверки кода с файлом текста (.txt), убедитесь, что код шифрования и расшифровки файла правильно. Убедитесь, что расшифровать файл в новый файл (как в этой статье процедуры Main() ) вместо исходного файла. Проверьте расшифрованного файла и сравнить его с исходным файлом.
+Полный пример кода
+
+using System;
+using System.IO;
+using System.Security;
+using System.Security.Cryptography;
+using System.Runtime.InteropServices;
+using System.Text;
+
+namespace CSEncryptDecrypt
+{
+   class Class1
+   {
+      //  Call this function to remove the key from memory after use for security
+      [System.Runtime.InteropServices.DllImport("KERNEL32.DLL", EntryPoint="RtlZeroMemory")]
+      public static extern bool ZeroMemory(IntPtr Destination, int Length);
+		
+      // Function to Generate a 64 bits Key.
+      static string GenerateKey() 
+      {
+         // Create an instance of Symetric Algorithm. Key and IV is generated automatically.
+         DESCryptoServiceProvider desCrypto =(DESCryptoServiceProvider)DESCryptoServiceProvider.Create();
+
+         // Use the Automatically generated key for Encryption. 
+         return ASCIIEncoding.ASCII.GetString(desCrypto.Key);
+      }
+
+      static void EncryptFile(string sInputFilename,
+         string sOutputFilename, 
+         string sKey) 
+      {
+         FileStream fsInput = new FileStream(sInputFilename, 
+            FileMode.Open, 
+            FileAccess.Read);
+
+         FileStream fsEncrypted = new FileStream(sOutputFilename, 
+            FileMode.Create, 
+            FileAccess.Write);
+         DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+         DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+         DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+         ICryptoTransform desencrypt = DES.CreateEncryptor();
+         CryptoStream cryptostream = new CryptoStream(fsEncrypted, 
+            desencrypt, 
+            CryptoStreamMode.Write); 
+
+         byte[] bytearrayinput = new byte[fsInput.Length];
+         fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
+         cryptostream.Write(bytearrayinput, 0, bytearrayinput.Length);
+         cryptostream.Close();
+         fsInput.Close();
+         fsEncrypted.Close();
+      }
+
+      static void DecryptFile(string sInputFilename, 
+         string sOutputFilename,
+         string sKey)
+      {
+         DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+         //A 64 bit key and IV is required for this provider.
+         //Set secret key For DES algorithm.
+         DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+         //Set initialization vector.
+         DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+
+         //Create a file stream to read the encrypted file back.
+         FileStream fsread = new FileStream(sInputFilename, 
+            FileMode.Open, 
+            FileAccess.Read);
+         //Create a DES decryptor from the DES instance.
+         ICryptoTransform desdecrypt = DES.CreateDecryptor();
+         //Create crypto stream set to read and do a 
+         //DES decryption transform on incoming bytes.
+         CryptoStream cryptostreamDecr = new CryptoStream(fsread, 
+            desdecrypt,
+            CryptoStreamMode.Read);
+         //Print the contents of the decrypted file.
+         StreamWriter fsDecrypted = new StreamWriter(sOutputFilename);
+         fsDecrypted.Write(new StreamReader(cryptostreamDecr).ReadToEnd());
+         fsDecrypted.Flush();
+         fsDecrypted.Close();
+      } 
+
+      static void Main()
+      {
+         // Must be 64 bits, 8 bytes.
+         // Distribute this key to the user who will decrypt this file.
+         string sSecretKey;
+         
+         // Get the Key for the file to Encrypt.
+         sSecretKey = GenerateKey();
+
+         // For additional security Pin the key.
+         GCHandle gch = GCHandle.Alloc( sSecretKey,GCHandleType.Pinned );
+         
+         // Encrypt the file.        
+         EncryptFile(@"C:\MyData.txt", 
+            @"C:\Encrypted.txt", 
+            sSecretKey);
+
+         // Decrypt the file.
+         DecryptFile(@"C:\Encrypted.txt", 
+            @"C:\Decrypted.txt", 
+            sSecretKey);
+
+         // Remove the Key from memory. 
+         ZeroMemory(gch.AddrOfPinnedObject(), sSecretKey.Length * 2);
+         gch.Free();
+      }
+   }
+}
+Ссылки
+Дополнительные сведения о криптографии и с помощью криптографических функций .NET см ниже веб-узлу MSDN:
+Пространство имен System.Security.Cryptography
+Центр разработчиков Microsoft платформа.NET Framework
+Warning: This article has been translated automatically
+Свойства
+Номер статьи: 307010 — последний просмотр: 05/23/2015 13:48:00 — редакция: 13.0
+
+Информация в данной статье относится к следующим продуктам.
+Microsoft Visual C# 2005
+Microsoft Visual C# .NET 2003 Standard Edition
+Microsoft Visual C# .NET 2002 Standard Edition
+Ключевые слова:
+kbsecurity kbio kbcrypt kbhowtomaster kbmt KB307010 KbMtru
+Отзывы и предложения
+Была ли эта информация полезной?  Да   Нет   Отчасти
+Посоветуйте нам меры, которые помогут улучшить статью

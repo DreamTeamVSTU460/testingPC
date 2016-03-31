@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Security;
 using System.Security.Cryptography;
 using System.Diagnostics;
+using System.IO;
 
 namespace TestCPU
 {
@@ -14,15 +15,20 @@ namespace TestCPU
         // Тест хеширования по алгоритму SHA1
         public string HashTest()
         {
-            byte[] data = new byte[15000];
+            byte[] data = new byte[2000000];
             byte[] result;
+
+            string file = @"C:\file.txt";
 
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
 
             SHA1 sha = new SHA1CryptoServiceProvider();
-            for (int i=0; i<100000; i++)
-                result = sha.ComputeHash(data);
+            // This is one implementation of the abstract class SHA1.
+
+            FileStream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read, 1000);
+            for (int i = 0; i < 2000000; i++)
+                result = sha.ComputeHash(stream);
 
             stopWatch.Stop();
             TimeSpan ts = stopWatch.Elapsed;
