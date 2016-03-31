@@ -81,6 +81,9 @@
             this.hashTestStart = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.HashTestTime = new System.Windows.Forms.TextBox();
+            this.z1 = new ZedGraph.ZedGraphControl();
+            this.testingProgressBar = new System.Windows.Forms.ProgressBar();
+            this.TempretureButton = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -454,6 +457,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.TempretureButton);
+            this.groupBox1.Controls.Add(this.testingProgressBar);
+            this.groupBox1.Controls.Add(this.z1);
             this.groupBox1.Controls.Add(this.ImageTestStart);
             this.groupBox1.Controls.Add(this.label27);
             this.groupBox1.Controls.Add(this.ImageTestTime);
@@ -577,6 +583,32 @@
             this.HashTestTime.Size = new System.Drawing.Size(104, 20);
             this.HashTestTime.TabIndex = 30;
             // 
+            // z1
+            // 
+            this.z1.IsShowPointValues = false;
+            this.z1.Location = new System.Drawing.Point(9, 188);
+            this.z1.Name = "z1";
+            this.z1.PointValueFormat = "G";
+            this.z1.Size = new System.Drawing.Size(364, 159);
+            this.z1.TabIndex = 42;
+            // 
+            // testingProgressBar
+            // 
+            this.testingProgressBar.Location = new System.Drawing.Point(6, 162);
+            this.testingProgressBar.Name = "testingProgressBar";
+            this.testingProgressBar.Size = new System.Drawing.Size(366, 23);
+            this.testingProgressBar.TabIndex = 43;
+            // 
+            // TempretureButton
+            // 
+            this.TempretureButton.Location = new System.Drawing.Point(7, 132);
+            this.TempretureButton.Name = "TempretureButton";
+            this.TempretureButton.Size = new System.Drawing.Size(365, 23);
+            this.TempretureButton.TabIndex = 44;
+            this.TempretureButton.Text = "Замерить температуру CPU";
+            this.TempretureButton.UseVisualStyleBackColor = true;
+            this.TempretureButton.Click += new System.EventHandler(this.TempretureButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -649,6 +681,9 @@
         private System.Windows.Forms.Button ImageTestStart;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox ImageTestTime;
+        private System.Windows.Forms.ProgressBar testingProgressBar;
+        private ZedGraph.ZedGraphControl z1;
+        private System.Windows.Forms.Button TempretureButton;
     }
 }
 
