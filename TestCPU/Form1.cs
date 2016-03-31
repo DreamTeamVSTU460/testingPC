@@ -22,22 +22,28 @@ namespace TestCPU
 
             // Запрос на получение информации о ЦП
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_Processor");
-
-            // Вывод информации о ЦП в форму
-            foreach (ManagementObject queryObj in searcher.Get())
+            try
             {
-                name.Text = queryObj["Name"].ToString();
-                numCore.Text = queryObj["NumberOfCores"].ToString();
-                ident.Text = queryObj["ProcessorId"].ToString();
-                speed.Text = queryObj["MaxClockSpeed"].ToString() + " MHz";
-                sysName.Text = queryObj["SystemName"].ToString();
-                numLogCore.Text = queryObj["NumberOfLogicalProcessors"].ToString();
-                curSpeed.Text = queryObj["CurrentClockSpeed"].ToString() + " MHz";
-                data.Text = queryObj["DataWidth"].ToString() + " Bit";
-                Cache1.Text = queryObj["L2CacheSize"].ToString() + " Kilobytes";
-                Cache2.Text = queryObj["L3CacheSize"].ToString() + " Kilobytes";
-                //Load.Text = queryObj["LoadPercentage"].ToString() + " %"; // У меня эта строчка не работает
-                Manufacturer.Text = queryObj["Manufacturer"].ToString();
+                // Вывод информации о ЦП в форму
+                foreach (ManagementObject queryObj in searcher.Get())
+                {
+                    name.Text = queryObj["Name"].ToString();
+                    numCore.Text = queryObj["NumberOfCores"].ToString();
+                    ident.Text = queryObj["ProcessorId"].ToString();
+                    speed.Text = queryObj["MaxClockSpeed"].ToString() + " MHz";
+                    sysName.Text = queryObj["SystemName"].ToString();
+                    numLogCore.Text = queryObj["NumberOfLogicalProcessors"].ToString();
+                    curSpeed.Text = queryObj["CurrentClockSpeed"].ToString() + " MHz";
+                    data.Text = queryObj["DataWidth"].ToString() + " Bit";
+                    Cache1.Text = queryObj["L2CacheSize"].ToString() + " Kilobytes";
+                    Cache2.Text = queryObj["L3CacheSize"].ToString() + " Kilobytes";
+                    Load.Text = queryObj["LoadPercentage"].ToString() + " %"; // У меня эта строчка не работает
+                    Manufacturer.Text = queryObj["Manufacturer"].ToString();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -45,7 +51,7 @@ namespace TestCPU
         {
             // Здесь должен быть запуск замеров
 
-            string time = test.HashTest();
+            string time = test.HashTest(2000000, testingProgressBar);
             HashTestTime.Text = time;
         }
 
@@ -76,18 +82,7 @@ namespace TestCPU
         private void TempretureButton_Click(object sender, EventArgs e)
         {
             temperatureGraph();
-        }
-        private double getTemperature()
-        {
-            double temp = 0.0;
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\WMI", "Select * From MSAcpi_ThermalZoneTemperature");
-            foreach (ManagementObject obj in searcher.Get())
-            {
-                temp = Convert.ToDouble(obj["CurrentTemperature"].ToString());
-                temp = (temp - 2732) / 10.0;
-            }
-            return temp;
-        }
+        }       
 
         private async void temperatureGraph()
         {
@@ -96,12 +91,13 @@ namespace TestCPU
             GraphPane pane = z1.GraphPane;
             double[] x = new double[100];
             double[] y = new double[100];
+            Measure t = new Measure();
             testingProgressBar.Maximum = 100;
             for (int i = 0; i < 100; i++)
             {
-                y[i] = getTemperature();
+                y[i] = t.GetTemperature();
                 x[i] = i * 100;
-                await pause();
+                await pause(1500);
                 testingProgressBar.Value++;
             }
             pane.XAxis.Title = "Время";
@@ -111,9 +107,9 @@ namespace TestCPU
             z1.AxisChange();
             z1.Invalidate();
         }
-        private async Task pause()
+        private async Task pause(int time)
         {
-            await Task.Delay(1500);
+            await Task.Delay(time);
         }
     }
 }

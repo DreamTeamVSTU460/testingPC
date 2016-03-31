@@ -7,18 +7,21 @@ using System.Security;
 using System.Security.Cryptography;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 
 namespace TestCPU
 {
     class Tests
     {
         // Тест хеширования по алгоритму SHA1
-        public string HashTest()
+        public string HashTest(int bytes, ProgressBar pb)
         {
-            byte[] data = new byte[2000000];
+            byte[] data = new byte[bytes];
             byte[] result;
 
-            string file = @"C:\file.txt";
+            pb.Maximum = bytes;
+
+            string file = @"file.txt";
 
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -26,10 +29,18 @@ namespace TestCPU
             SHA1 sha = new SHA1CryptoServiceProvider();
             // This is one implementation of the abstract class SHA1.
 
-            FileStream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read, 1000);
-            for (int i = 0; i < 2000000; i++)
-                result = sha.ComputeHash(stream);
+            try
+            {
+                FileStream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read, 1000);
 
+                for (int i = 0; i < bytes; i++)
+                {
+                    result = sha.ComputeHash(stream);
+                    pb.Value++;
+                }
+
+            }
+            catch (Exception e) { MessageBox.Show(e.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             stopWatch.Stop();
             TimeSpan ts = stopWatch.Elapsed;
             string elapsedTime = String.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);
