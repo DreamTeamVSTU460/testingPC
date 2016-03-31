@@ -1,0 +1,6 @@
+TestCPU/obj/Debug/TestCPU.pdb
+TestCPU/obj/Debug/TestCPU.exe
+*.cache
+TestCPU/obj/Debug/TestCPU.csproj.GenerateResource.Cache
+*.exe
+TestCPU/bin/Debug/TestCPU.pdb

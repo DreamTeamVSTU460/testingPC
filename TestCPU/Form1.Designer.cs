@@ -81,6 +81,10 @@
             this.hashTestStart = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.HashTestTime = new System.Windows.Forms.TextBox();
+            this.testingProgressBar = new System.Windows.Forms.ProgressBar();
+            this.z1 = new ZedGraph.ZedGraphControl();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.TempretureButton = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -454,6 +458,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.TempretureButton);
+            this.groupBox1.Controls.Add(this.z1);
+            this.groupBox1.Controls.Add(this.testingProgressBar);
             this.groupBox1.Controls.Add(this.ImageTestStart);
             this.groupBox1.Controls.Add(this.label27);
             this.groupBox1.Controls.Add(this.ImageTestTime);
@@ -468,7 +475,7 @@
             this.groupBox1.Controls.Add(this.HashTestTime);
             this.groupBox1.Location = new System.Drawing.Point(478, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(379, 353);
+            this.groupBox1.Size = new System.Drawing.Size(310, 353);
             this.groupBox1.TabIndex = 31;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Тестирование ЦП";
@@ -577,13 +584,42 @@
             this.HashTestTime.Size = new System.Drawing.Size(104, 20);
             this.HashTestTime.TabIndex = 30;
             // 
+            // testingProgressBar
+            // 
+            this.testingProgressBar.Location = new System.Drawing.Point(9, 128);
+            this.testingProgressBar.Name = "testingProgressBar";
+            this.testingProgressBar.Size = new System.Drawing.Size(292, 23);
+            this.testingProgressBar.TabIndex = 42;
+            // 
+            // z1
+            // 
+            this.z1.IsShowPointValues = false;
+            this.z1.Location = new System.Drawing.Point(7, 191);
+            this.z1.Name = "z1";
+            this.z1.PointValueFormat = "G";
+            this.z1.Size = new System.Drawing.Size(294, 147);
+            this.z1.TabIndex = 43;
+            // 
+            // TempretureButton
+            // 
+            this.TempretureButton.Location = new System.Drawing.Point(9, 158);
+            this.TempretureButton.Name = "TempretureButton";
+            this.TempretureButton.Size = new System.Drawing.Size(292, 23);
+            this.TempretureButton.TabIndex = 44;
+            this.TempretureButton.Text = "Замерить температуру";
+            this.TempretureButton.UseVisualStyleBackColor = true;
+            this.TempretureButton.Click += new System.EventHandler(this.TempretureButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(869, 378);
+            this.ClientSize = new System.Drawing.Size(797, 375);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Тестирование ЦП";
             this.groupBox2.ResumeLayout(false);
@@ -649,6 +685,10 @@
         private System.Windows.Forms.Button ImageTestStart;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox ImageTestTime;
+        private System.Windows.Forms.ProgressBar testingProgressBar;
+        private ZedGraph.ZedGraphControl z1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button TempretureButton;
     }
 }
 
