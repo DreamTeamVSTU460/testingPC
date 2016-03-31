@@ -16,6 +16,7 @@ namespace TestCPU
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
             Application.Run(new Form1());
         }
     }

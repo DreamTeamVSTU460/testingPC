@@ -37,3 +37,15 @@ C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.Properties.R
 C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.csproj.GenerateResource.Cache
 C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.exe
 C:\Users\Fedya\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.pdb
+C:\Users\Egor\Documents\GitHub\testingPC\TestCPU\bin\Debug\TestCPU.exe.config
+C:\Users\Egor\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.exe
+C:\Users\Egor\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.pdb
+C:\Users\Egor\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.csprojResolveAssemblyReference.cache
+C:\Users\Egor\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.Form1.resources
+C:\Users\Egor\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.Properties.Resources.resources
+C:\Users\Egor\Documents\GitHub\testingPC\TestCPU\obj\Debug\TestCPU.csproj.GenerateResource.Cache
+C:\Users\Egor\Documents\GitHub\testingPC\TestCPU\bin\Debug\TestCPU.exe
+C:\Users\Egor\Documents\GitHub\testingPC\TestCPU\bin\Debug\TestCPU.pdb
+C:\Users\Egor\Documents\GitHub\testingPC\TestCPU\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Egor\Documents\GitHub\testingPC\TestCPU\bin\Debug\ICSharpCode.SharpZipLib.pdb
+C:\Users\Egor\Documents\GitHub\testingPC\TestCPU\bin\Debug\ICSharpCode.SharpZipLib.xml

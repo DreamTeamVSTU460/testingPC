@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Management;
 using ZedGraph;
+using System.Threading;
 
 namespace TestCPU
 {
@@ -47,34 +48,53 @@ namespace TestCPU
             }
         }
 
+       
+        
         private void hashTestStart_Click(object sender, EventArgs e)
         {
+            Thread testHash = new Thread(testingHash);
             // Здесь должен быть запуск замеров
+            testHash.Start();
 
-            string time = test.HashTest(2000000, testingProgressBar);
-            HashTestTime.Text = time;
         }
 
         private void CriptTestStart_Click(object sender, EventArgs e)
         {
             // Здесь должен быть запуск замеров
-
-            string time = test.CriptTest();
-            CriptTestTime.Text = time;
+            Thread testCrypt = new Thread(testingCrypt);
+            testCrypt.Start();
         }
 
         private void CompressTestStart_Click(object sender, EventArgs e)
         {
             // Здесь должен быть запуск замеров
-
-            string time = test.CompressTest();
-            CompressTestTime.Text = time;
+            Thread testCompress = new Thread(testingCompress);
+            testCompress.Start();
         }
 
         private void ImageTestStart_Click(object sender, EventArgs e)
         {
             // Здесь должен быть запуск замеров
-
+            Thread testImage = new Thread(testingImage);
+            testImage.Start();
+        }
+        void testingHash()
+        {
+            string time = test.HashTest(2000000, testingProgressBar);
+            HashTestTime.Text = time;
+        }
+        void testingCrypt()
+        {
+            string time = test.CriptTest();
+            CriptTestTime.Text = time;
+        }
+        void testingCompress()
+        {
+            string time = test.CompressTest();
+            CompressTestTime.Text = time;
+        }
+        void testingImage()
+        {
             string time = test.ImageTest();
             ImageTestTime.Text = time;
         }
